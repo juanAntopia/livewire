@@ -10,10 +10,15 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- <x-welcome /> --}}
 
-                @livewire('create-post', [
+                {{-- @livewire('create-post', [
                     'title' => 'hola perro',
                     'user' => 1
-                ])
+                ]) --}}
+
+                {{-- @livewire('contador') --}}
+
+                @livewire('paises')
+
             </div>
         </div>
     </div>
