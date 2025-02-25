@@ -3,21 +3,21 @@
         <form wire:submit="save">
             <div class="mb-4">
                 <x-label>Nombre</x-label>
-                <x-input class="w-full" wire:model="postCreate.title"></x-input>
+                <x-input class="w-full" wire:model.live="postCreate.title"></x-input>
 
                 <x-input-error for="postCreate.title"></x-input-error>
             </div>
 
             <div class="mb-4">
                 <x-label>Contenido</x-label>
-                <x-textarea class="w-full" wire:model="postCreate.content"></x-textarea>
+                <x-textarea class="w-full" wire:model.live="postCreate.content"></x-textarea>
                 <x-input-error for="postCreate.content"></x-input-error>
 
             </div>
 
             <div class="mb-4">
                 <x-label>Categorías</x-label>
-                <x-select class="w-full" wire:model="postCreate.category_id">
+                <x-select class="w-full" wire:model.live="postCreate.category_id">
                     <option value="Selecciona una categoría">Selecciona una categoría</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">
@@ -35,7 +35,7 @@
                     @foreach ($tags as $tag)
                         <li>
                             <label for="">
-                                <x-checkbox wire:model="postCreate.tags" id="" value="{{ $tag->id }}" />
+                                <x-checkbox wire:model.live="postCreate.tags" id="" value="{{ $tag->id }}" />
                                 {{ $tag->name }}
                             </label>
                         </li>
@@ -68,7 +68,7 @@
 
     {{-- formulario para editar --}}
     <form wire:submit="update">
-        <x-dialog-modal wire:model="open">
+        <x-dialog-modal wire:model="postEdit.open">
             <x-slot name="title">
                 Actualizar Post
             </x-slot>
@@ -76,19 +76,19 @@
             <x-slot name="content">
                 <div class="mb-4">
                     <x-label>Nombre</x-label>
-                    <x-input class="w-full" wire:model="postEdit.title"></x-input>
+                    <x-input class="w-full" wire:model.live="postEdit.title"></x-input>
                     <x-input-error for="postEdit.title"></x-input-error>
                 </div>
 
                 <div class="mb-4">
                     <x-label>Contenido</x-label>
-                    <x-textarea class="w-full" wire:model="postEdit.content"></x-textarea>
+                    <x-textarea class="w-full" wire:model.live="postEdit.content"></x-textarea>
                     <x-input-error for="postEdit.content"></x-input-error>
                 </div>
 
                 <div class="mb-4">
                     <x-label>Categorías</x-label>
-                    <x-select class="w-full" wire:model="postEdit.category_id">
+                    <x-select class="w-full" wire:model.live="postEdit.category_id">
                         <option value="Selecciona una categoría">Selecciona una categoría</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">
@@ -105,7 +105,7 @@
                         @foreach ($tags as $tag)
                             <li>
                                 <label for="">
-                                    <x-checkbox wire:model="postEdit.tags" wire:key="tag-{{ $tag->id }}"
+                                    <x-checkbox wire:model.live="postEdit.tags" wire:key="tag-{{ $tag->id }}"
                                         id="" value="{{ $tag->id }}" />
                                     {{ $tag->name }}
                                 </label>
@@ -118,7 +118,7 @@
 
             <x-slot name="footer">
                 <div class="flex justify-end">
-                    <x-danger-button class="mr-2" wire:click="$set('open', false)">
+                    <x-danger-button class="mr-2" wire:click="$set('postEdit.open', false)">
                         Cancelar
                     </x-danger-button>
                     <x-button>Actualizar</x-button>
