@@ -18,7 +18,7 @@
             <div class="mb-4">
                 <x-label>Categorías</x-label>
                 <x-select class="w-full" wire:model.live="postCreate.category_id">
-                    <option value="Selecciona una categoría">Selecciona una categoría</option>
+                    <option value="Selecciona una categoría" disabled>Selecciona una categoría</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">
                             {{ $category->name }}
@@ -89,7 +89,7 @@
                 <div class="mb-4">
                     <x-label>Categorías</x-label>
                     <x-select class="w-full" wire:model.live="postEdit.category_id">
-                        <option value="Selecciona una categoría">Selecciona una categoría</option>
+                        <option value="Selecciona una categoría" disabled>Selecciona una categoría</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">
                                 {{ $category->name }}
