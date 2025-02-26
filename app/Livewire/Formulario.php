@@ -15,52 +15,15 @@ class Formulario extends Component
     public $categories, $tags;
 
     //validación
-    // #[Rule([
-    //     'postCreate.title' => 'required',
-    //     'postCreate.content' => 'required',
-    //     'postCreate.category_id' => 'required|exists:categories,id',
-    //     'postCreate.tags' => 'required|array'
-    // ], [], [
-    //     'postCreate.title' => 'título',
-    //     'postCreate.content' => 'contenido',
-    //     'postCreate.category_id' => 'categoría',
-    //     'postCreate.tags' => 'etiquetas'
-    // ])]
     public PostCreateForm $postCreate;
     public PostEditForm $postEdit;
 
     public $posts;
 
-    // public function rules() {
-    //     return [
-    //         'postCreate.title' => 'required',
-    //         'postCreate.content' => 'required',
-    //         'postCreate.category_id' => 'required|exists:categories,id',
-    //         'postCreate.tags' => 'required|array'
-    //     ];
-    // }
-
-    // public function messages (){
-    //     return [
-    //         'postCreate.title.required' => 'El campo título es requerido.',
-    //         'postCreate.content.required' => 'El campo contenido es requerido.',
-    //         'postCreate.category_id.required' => 'El campo categoría es requerido.',
-    //         'postCreate.tags.required' => 'El campo etiquetas es requerido.'
-    //     ];
-    // }
-
-    // public function validationAttributes () {
-    //     return [
-    //         'postCreate.title' => 'título',
-    //         'postCreate.content' => 'contenido',
-    //         'postCreate.category_id' => 'categoría',
-    //         'postCreate.tags' => 'etiquetas'
-    //     ];
-    // }
-
     public function save () {
         $this->postCreate->save();
         $this->posts = Post::all();
+        $this->dispatch('post-status', 'Nuevo post creado!');
     }
 
     public function edit($postId) {
@@ -71,6 +34,7 @@ class Formulario extends Component
     public function update () {
         $this->postEdit->update();
         $this->posts = Post::all();
+        $this->dispatch('post-status', 'Post Actualizado!');
     }
 
     public function destroy($postId) {
@@ -79,6 +43,7 @@ class Formulario extends Component
         $post->delete();
 
         $this->posts = Post::all();
+        $this->dispatch('post-status', 'Post Eliminado!');
     }
 
     public function mount() {
