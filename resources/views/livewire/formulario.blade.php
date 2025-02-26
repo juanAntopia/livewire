@@ -126,4 +126,12 @@
             </x-slot>
         </x-dialog-modal>
     </form>
+
+    @push('js')
+        <script>
+            Livewire.on('post-status', function(comment){
+                console.log(comment[0])
+            })
+        </script>
+    @endpush
 </div>
