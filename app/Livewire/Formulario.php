@@ -49,6 +49,10 @@ class Formulario extends Component
         $this->dispatch('post-status', 'Post Eliminado!');
     }
 
+    // public function placeholder (){ no se ocupa porque lo definí en el archivo de configuración de livewire
+    //     return view('livewire.placeholders.skeleton');
+    // }
+
     //ciclo de vida de un componente
     public function mount() {
         $this->categories = Category::all();
