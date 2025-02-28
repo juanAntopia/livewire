@@ -18,13 +18,14 @@
 
             {{-- @livewire('paises') --}}
 
-            {{-- @livewire('formulario')
+            {{-- @livewire('formulario') --}}
+            <livewire:formulario lazy />
 
             <div class="mt-8">
                 @livewire('comments')
-            </div> --}}
+            </div>
 
-            @livewire('father')
+            {{-- @livewire('father') --}}
         </div>
     </div>
 </x-app-layout>
