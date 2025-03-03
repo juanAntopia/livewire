@@ -29,16 +29,23 @@
 
             <div class="mb-4 flex">
                 <x-label for="image_path">Selecciona un archivo</x-label>
-                <input 
-                    type="file" 
-                    id="image_path" 
-                    wire:model="postCreate.image"
-                    wire:key="{{ $postCreate->imageKey }}"
-                >
+                <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
+                    x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-cancel="uploading = false"
+                    x-on:livewire-upload-error="uploading = false"
+                    x-on:livewire-upload-progress="progress = $event.detail.progress">
+                    <input type="file" id="image_path" wire:model="postCreate.image"
+                        wire:key="{{ $postCreate->imageKey }}">
+
+                    <div x-show="uploading">
+                        <div x-text="progress"></div>
+                        <progress max="100" x-bind:value="progress"></progress>
+                    </div>
+                </div>
 
                 <div>
                     @if ($postCreate->image)
-                        <img src="{{ $postCreate->image->temporaryUrl() }}" alt="" width="150px" height="150px">
+                        <img src="{{ $postCreate->image->temporaryUrl() }}" alt="" width="150px"
+                            height="150px">
                     @endif
                 </div>
             </div>
@@ -49,7 +56,8 @@
                     @foreach ($tags as $tag)
                         <li>
                             <label for="">
-                                <x-checkbox wire:model.live="postCreate.tags" id="" value="{{ $tag->id }}" />
+                                <x-checkbox wire:model.live="postCreate.tags" id=""
+                                    value="{{ $tag->id }}" />
                                 {{ $tag->name }}
                             </label>
                         </li>
@@ -143,7 +151,7 @@
 
     @push('js')
         <script>
-            Livewire.on('post-status', function(comment){
+            Livewire.on('post-status', function(comment) {
                 console.log(comment[0])
             })
         </script>
