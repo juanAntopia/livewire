@@ -19,7 +19,7 @@
             {{-- @livewire('paises') --}}
 
             {{-- @livewire('formulario') --}}
-            <livewire:formulario lazy />
+            <livewire:formulario />
 
             <div class="mt-8">
                 @livewire('comments')

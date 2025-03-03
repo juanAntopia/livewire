@@ -10,11 +10,14 @@ use App\Models\Tag;
 use Exception;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 use function PHPUnit\Framework\throwException;
 
 class Formulario extends Component
 {
+    use WithFileUploads;
+
     public $categories, $tags;
 
     //validación
@@ -61,17 +64,17 @@ class Formulario extends Component
     }
 
     public function updating($property, $value) {
-        if($property === 'postCreate.category_id') {
-            if($value > 3) {
-                throw new \Exception('No puedes seleccionar esta categoría');
-            }
-        }
-        dd($property);
+        // if($property === 'postCreate.category_id') {
+        //     if($value > 3) {
+        //         throw new \Exception('No puedes seleccionar esta categoría');
+        //     }
+        // }
+        // dd($property);
     }
 
     public function updated($property, $value)
     {
-        dd($value);
+        // dd($value);
     }
 
     public function hydrate () {

@@ -12,7 +12,6 @@
                 <x-label>Contenido</x-label>
                 <x-textarea class="w-full" wire:model.live="postCreate.content"></x-textarea>
                 <x-input-error for="postCreate.content"></x-input-error>
-
             </div>
 
             <div class="mb-4">
@@ -26,7 +25,22 @@
                     @endforeach
                 </x-select>
                 <x-input-error for="postCreate.category_id"></x-input-error>
+            </div>
 
+            <div class="mb-4 flex">
+                <x-label for="image_path">Selecciona un archivo</x-label>
+                <input 
+                    type="file" 
+                    id="image_path" 
+                    wire:model="postCreate.image"
+                    wire:key="{{ $postCreate->imageKey }}"
+                >
+
+                <div>
+                    @if ($postCreate->image)
+                        <img src="{{ $postCreate->image->temporaryUrl() }}" alt="" width="150px" height="150px">
+                    @endif
+                </div>
             </div>
 
             <div class="mb-4">

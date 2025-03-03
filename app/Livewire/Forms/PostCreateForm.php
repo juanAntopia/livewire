@@ -22,6 +22,11 @@ class PostCreateForm extends Form
     #[Rule('required|array')]
     public $tags = [];
 
+    #[Rule('nullable|image|max:1024')]
+    public $image;
+
+    public $imageKey;
+
     public function save()
     {
         $this->validate();
@@ -31,6 +36,13 @@ class PostCreateForm extends Form
         );
 
         $post->tags()->attach($this->tags);
+
+        if($this->image) {
+            $post->image_path = $this->image->store('posts');
+            $post->save();
+        }
+
+        $this->imageKey = rand();
 
         $this->reset();
     }
