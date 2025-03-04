@@ -66,10 +66,21 @@
                 <x-input-error for="postCreate.tags"></x-input-error>
             </div>
 
-            <div class="flex justify-end">
+            <div class="flex justify-end disabled:opacity-25" wire:loading.attr="disabled">
                 <x-button>Crear</x-button>
             </div>
+            {{-- <div class="flex justify-end" wire:loading.class="opacity-25">
+                <x-button>Crear</x-button>
+            </div> --}}
         </form>
+
+        {{-- <div wire:loading wire:target="save">
+            Procesando...
+        </div> --}}
+
+        <div wire:loading.delay.shortest wire:target="save">
+            Procesando...
+        </div>
     </div>
 
     <div class="bg-white p-6 shadow rounded-lg">
