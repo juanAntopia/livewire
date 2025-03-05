@@ -19,13 +19,15 @@
             {{-- @livewire('paises') --}}
 
             {{-- @livewire('formulario') --}}
-            <livewire:formulario />
+            {{-- <livewire:formulario />
 
             <div class="mt-8">
                 @livewire('comments')
-            </div>
+            </div> --}}
 
             {{-- @livewire('father') --}}
+
+            @livewire('computed-c')
         </div>
     </div>
 </x-app-layout>
