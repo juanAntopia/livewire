@@ -17,7 +17,7 @@
             <div class="mb-4">
                 <x-label>Categorías</x-label>
                 <x-select class="w-full" wire:model.live="postCreate.category_id">
-                    <option value="Selecciona una categoría" disabled>Selecciona una categoría</option>
+                    <option value="" disabled>Selecciona una categoría</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">
                             {{ $category->name }}
@@ -97,6 +97,10 @@
                 </li>
             @endforeach
         </ul>
+
+        <div class="mt-4">
+            {{ $posts->links(data: ['scrollTo' => false]) }}
+        </div>
     </div>
 
     {{-- formulario para editar --}}
