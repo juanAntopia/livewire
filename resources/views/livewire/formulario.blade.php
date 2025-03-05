@@ -84,6 +84,10 @@
     </div>
 
     <div class="bg-white p-6 shadow rounded-lg">
+        <div class="mb-4">
+            <x-input class="w-full" wire:model.live="search" placeholder="Buscar....."></x-input>
+        </div>
+
         <ul class="list-disc list-inside space-y-2">
             @foreach ($posts as $post)
                 <li class="flex justify-between" wire:key="post-{{ $post->id }}">
