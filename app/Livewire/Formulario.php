@@ -11,12 +11,16 @@ use Exception;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 use function PHPUnit\Framework\throwException;
 
 class Formulario extends Component
 {
     use WithFileUploads;
+    use WithPagination;
+    // use WithoutUrlPagination;
 
     public $categories, $tags;
 
@@ -24,11 +28,11 @@ class Formulario extends Component
     public PostCreateForm $postCreate;
     public PostEditForm $postEdit;
 
-    public $posts;
+    // public $posts;
 
     public function save () {
         $this->postCreate->save();
-        $this->posts = Post::all();
+        $this->resetPage(pageName:'pagePosts');
         $this->dispatch('post-status', 'Nuevo post creado!');
     }
 
@@ -39,7 +43,6 @@ class Formulario extends Component
 
     public function update () {
         $this->postEdit->update();
-        $this->posts = Post::all();
         $this->dispatch('post-status', 'Post Actualizado!');
     }
 
@@ -48,7 +51,6 @@ class Formulario extends Component
 
         $post->delete();
 
-        $this->posts = Post::all();
         $this->dispatch('post-status', 'Post Eliminado!');
     }
 
@@ -60,7 +62,6 @@ class Formulario extends Component
     public function mount() {
         $this->categories = Category::all();
         $this->tags = Tag::all();
-        $this->posts = Post::all();
     }
 
     public function updating($property, $value) {
@@ -87,6 +88,7 @@ class Formulario extends Component
 
     public function render()
     {
-        return view('livewire.formulario');
+        $posts = Post::orderBy('id', 'desc')->paginate(5, pageName: 'pagePosts');
+        return view('livewire.formulario', compact('posts'));
     }
 }
